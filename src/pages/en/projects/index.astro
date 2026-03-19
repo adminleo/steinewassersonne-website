@@ -4,6 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ProjectCard from '../../../components/projects/ProjectCard.astro';
 import ProjectFilter from '../../../components/projects/ProjectFilter.astro';
 import { useTranslations } from '../../../i18n/utils';
+import { withBase } from '../../../i18n/languages';
 
 const lang = 'en' as const;
 const t = useTranslations(lang);
@@ -39,7 +40,7 @@ const categories = [...new Set(allProjects.map((p) => p.data.category))];
               description={project.data.description}
               category={project.data.category}
               heroImage={project.data.heroImage}
-              href={`/en/projects/${project.id.split('/').pop()}/`}
+              href={withBase(`/en/projects/${project.id.split('/').pop()}/`)}
               location={project.data.location}
               year={project.data.year}
             />

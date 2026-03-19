@@ -2,7 +2,7 @@
 import Logo from '../icons/Logo.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { useTranslations, getNavItems } from '../../i18n/utils';
-import type { Lang } from '../../i18n/languages';
+import { type Lang, routeMap } from '../../i18n/languages';
 
 interface Props {
   lang: Lang;
@@ -15,7 +15,7 @@ const navItems = getNavItems(lang);
 
 <header class="sticky top-0 z-50 bg-brand-cream-50/95 backdrop-blur-sm border-b border-brand-cream-300">
   <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
-    <a href={`/${lang}/`} aria-label="Home">
+    <a href={routeMap.home[lang]} aria-label="Home">
       <Logo width={180} height={42} class="hidden sm:block" />
       <Logo variant="icon" width={36} height={36} class="sm:hidden" />
     </a>

@@ -16,7 +16,8 @@ const featuredProjects = (await getCollection('projects', ({ data }) =>
   data.lang === lang && data.featured === true
 )).sort((a, b) => a.data.order - b.data.order);
 
-const projectBase = lang === 'de' ? '/de/projekte' : '/en/projects';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const projectBase = lang === 'de' ? `${base}/de/projekte` : `${base}/en/projects`;
 ---
 
 <section class="section-padding bg-brand-cream-100">

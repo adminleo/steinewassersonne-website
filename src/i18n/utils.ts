@@ -14,6 +14,7 @@ export function useTranslations(lang: Lang) {
 }
 
 export function getAlternateUrl(currentPath: string, targetLang: Lang): string {
+  // Check static routes first
   for (const [, routes] of Object.entries(routeMap)) {
     for (const [, path] of Object.entries(routes)) {
       if (currentPath === path || currentPath === path.slice(0, -1)) {
@@ -21,7 +22,8 @@ export function getAlternateUrl(currentPath: string, targetLang: Lang): string {
       }
     }
   }
-  return currentPath.replace(/^\/(de|en)\//, `/${targetLang}/`);
+  // Fallback for dynamic routes: swap language segment
+  return currentPath.replace(/\/(de|en)\//, `/${targetLang}/`);
 }
 
 export function getNavItems(lang: Lang) {

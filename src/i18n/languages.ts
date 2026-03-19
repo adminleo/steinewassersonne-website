@@ -6,9 +6,16 @@ export const languages = {
 export type Lang = keyof typeof languages;
 export const defaultLang: Lang = 'de';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export const routeMap: Record<string, Record<Lang, string>> = {
-  home:     { de: '/de/',              en: '/en/' },
-  projects: { de: '/de/projekte/',     en: '/en/projects/' },
-  about:    { de: '/de/ueber-mich/',   en: '/en/about/' },
-  contact:  { de: '/de/kontakt/',      en: '/en/contact/' },
+  home:     { de: `${base}/de/`,              en: `${base}/en/` },
+  projects: { de: `${base}/de/projekte/`,     en: `${base}/en/projects/` },
+  about:    { de: `${base}/de/ueber-mich/`,   en: `${base}/en/about/` },
+  contact:  { de: `${base}/de/kontakt/`,      en: `${base}/en/contact/` },
 };
+
+export function withBase(path: string): string {
+  if (path.startsWith(base)) return path;
+  return `${base}${path}`;
+}
