@@ -1,0 +1,72 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/languages';
+import { routeMap } from '../../i18n/languages';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../projects/ProjectCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const featuredProjects = (await getCollection('projects', ({ data }) =>
+  data.lang === lang && data.featured === true
+)).sort((a, b) => a.data.order - b.data.order);
+
+const projectBase = lang === 'de' ? '/de/projekte' : '/en/projects';
+---
+
+<section class="section-padding bg-brand-cream-100">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-brand-teal-900 mb-4">
+        {t('featured.title')}
+      </h2>
+      <p class="text-brand-teal-700/70 max-w-2xl mx-auto">
+        {t('featured.subtitle')}
+      </p>
+    </div>
+
+    {featuredProjects.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            category={project.data.category}
+            heroImage={project.data.heroImage}
+            href={`${projectBase}/${project.id.split('/').pop()}/`}
+            location={project.data.location}
+            year={project.data.year}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[1, 2, 3].map(() => (
+          <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+            <div class="aspect-[4/3] bg-brand-cream-200 flex items-center justify-center">
+              <svg class="w-12 h-12 text-brand-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v14.25a1.5 1.5 0 0 0 1.5 1.5Z" />
+              </svg>
+            </div>
+            <div class="p-5">
+              <div class="h-3 bg-brand-cream-200 rounded w-1/3 mb-3"></div>
+              <div class="h-5 bg-brand-cream-200 rounded w-3/4 mb-3"></div>
+              <div class="h-3 bg-brand-cream-100 rounded w-full"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="text-center mt-10">
+      <a href={routeMap.projects[lang]} class="btn-secondary">
+        {t('featured.cta')}
+      </a>
+    </div>
+  </div>
+</section>

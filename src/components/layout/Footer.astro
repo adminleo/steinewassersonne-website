@@ -1,0 +1,62 @@
+---
+import Logo from '../icons/Logo.astro';
+import { useTranslations, getNavItems } from '../../i18n/utils';
+import type { Lang } from '../../i18n/languages';
+import { SITE } from '../../lib/constants';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const navItems = getNavItems(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-brand-teal-900 text-brand-cream-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Brand -->
+      <div>
+        <Logo variant="icon" width={40} height={40} class="text-brand-cream-200 mb-4" />
+        <p class="text-lg font-display font-semibold text-white mb-1">Steinewassersonne</p>
+        <p class="text-sm text-brand-cream-400">{t('footer.tagline')}</p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-brand-cream-400 mb-4">{t('footer.nav')}</h3>
+        <ul class="space-y-2">
+          {navItems.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm text-brand-cream-300 hover:text-white transition-colors">
+                {t(item.key)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-brand-cream-400 mb-4">{t('contact.info.title')}</h3>
+        <ul class="space-y-2 text-sm text-brand-cream-300">
+          <li>
+            <a href={`mailto:${SITE.email}`} class="hover:text-white transition-colors">{SITE.email}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-teal-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-brand-cream-500">
+        {t('footer.copyright').replace('{year}', String(year))}
+      </p>
+      <div class="flex gap-4 text-xs text-brand-cream-500">
+        <a href="#" class="hover:text-white transition-colors">{t('footer.legal')}</a>
+        <a href="#" class="hover:text-white transition-colors">{t('footer.privacy')}</a>
+      </div>
+    </div>
+  </div>
+</footer>

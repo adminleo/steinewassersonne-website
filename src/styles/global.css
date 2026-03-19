@@ -1,0 +1,61 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Brand Colors - Teal/Petrol */
+  --color-brand-teal-50: #e6f5f3;
+  --color-brand-teal-100: #b3e0da;
+  --color-brand-teal-200: #80ccc1;
+  --color-brand-teal-300: #4db8a8;
+  --color-brand-teal-400: #26a894;
+  --color-brand-teal-500: #1a7a6d;
+  --color-brand-teal-600: #166b5f;
+  --color-brand-teal-700: #115a50;
+  --color-brand-teal-800: #0d4a41;
+  --color-brand-teal-900: #083a33;
+  --color-brand-teal-950: #042a24;
+
+  /* Brand Colors - Cream/Sand */
+  --color-brand-cream-50: #fdfcf9;
+  --color-brand-cream-100: #faf8f2;
+  --color-brand-cream-200: #f5f0e8;
+  --color-brand-cream-300: #ede5d5;
+  --color-brand-cream-400: #e0d4bc;
+  --color-brand-cream-500: #d4c4a3;
+  --color-brand-cream-600: #bfaa82;
+  --color-brand-cream-700: #a69063;
+  --color-brand-cream-800: #8a7650;
+  --color-brand-cream-900: #6e5d3f;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-cream-50 text-brand-teal-900 font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-brand-teal-500 text-white font-medium rounded-lg hover:bg-brand-teal-600 transition-colors duration-200 text-sm cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-brand-teal-500 text-brand-teal-500 font-medium rounded-lg hover:bg-brand-teal-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+}

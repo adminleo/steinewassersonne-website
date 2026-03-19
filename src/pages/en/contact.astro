@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+import { SITE } from '../../lib/constants';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch — we look forward to your inquiry about landscape design and building greening."
+  lang={lang}
+>
+  <section class="section-padding">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <h1 class="text-4xl sm:text-5xl font-bold text-brand-teal-900 mb-4">
+          {t('contact.title')}
+        </h1>
+        <p class="text-xl text-brand-teal-700/70">
+          {t('contact.subtitle')}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Contact Form -->
+        <div class="lg:col-span-2">
+          <form
+            action="#"
+            method="POST"
+            class="bg-white rounded-xl p-8 shadow-sm space-y-6"
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-brand-teal-900 mb-2">
+                  {t('contact.form.name')} *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-brand-cream-300 bg-brand-cream-50 text-brand-teal-900 focus:outline-none focus:ring-2 focus:ring-brand-teal-500 focus:border-transparent transition"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-brand-teal-900 mb-2">
+                  {t('contact.form.email')} *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-brand-cream-300 bg-brand-cream-50 text-brand-teal-900 focus:outline-none focus:ring-2 focus:ring-brand-teal-500 focus:border-transparent transition"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="phone" class="block text-sm font-medium text-brand-teal-900 mb-2">
+                  {t('contact.form.phone')}
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full px-4 py-3 rounded-lg border border-brand-cream-300 bg-brand-cream-50 text-brand-teal-900 focus:outline-none focus:ring-2 focus:ring-brand-teal-500 focus:border-transparent transition"
+                />
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-brand-teal-900 mb-2">
+                  {t('contact.form.subject')} *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-brand-cream-300 bg-brand-cream-50 text-brand-teal-900 focus:outline-none focus:ring-2 focus:ring-brand-teal-500 focus:border-transparent transition"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-brand-teal-900 mb-2">
+                {t('contact.form.message')} *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-brand-cream-300 bg-brand-cream-50 text-brand-teal-900 focus:outline-none focus:ring-2 focus:ring-brand-teal-500 focus:border-transparent transition resize-y"
+              ></textarea>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <p class="text-xs text-brand-teal-600/60">
+                {t('contact.form.privacy')}
+              </p>
+              <button type="submit" class="btn-primary">
+                {t('contact.form.submit')}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact Info Sidebar -->
+        <aside class="space-y-8">
+          <div class="bg-brand-cream-100 rounded-xl p-6">
+            <h3 class="font-display text-lg font-semibold text-brand-teal-900 mb-4">
+              {t('contact.info.title')}
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-brand-teal-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+                <div>
+                  <p class="text-xs font-medium uppercase tracking-wider text-brand-teal-500 mb-1">{t('contact.info.email')}</p>
+                  <a href={`mailto:${SITE.email}`} class="text-sm text-brand-teal-800 hover:text-brand-teal-500 transition-colors">
+                    {SITE.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-brand-cream-100 rounded-xl p-6">
+            <h3 class="font-display text-lg font-semibold text-brand-teal-900 mb-4">
+              {t('contact.hours.title')}
+            </h3>
+            <p class="text-sm text-brand-teal-700">{t('contact.hours.text')}</p>
+          </div>
+
+          <!-- Map Placeholder -->
+          <div class="aspect-square bg-brand-cream-200 rounded-xl flex items-center justify-center">
+            <div class="text-center text-brand-teal-400">
+              <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              </svg>
+              <p class="text-sm">Map</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

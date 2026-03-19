@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactCTA from '../../components/home/ContactCTA.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'de' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="Über mich"
+  description="Erfahren Sie mehr über den Landschaftsarchitekten hinter Steinewassersonne — Philosophie, Qualifikationen und Arbeitsweise."
+  lang={lang}
+>
+  <section class="section-padding">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="max-w-3xl mb-16">
+        <h1 class="text-4xl sm:text-5xl font-bold text-brand-teal-900 mb-4">
+          {t('about.title')}
+        </h1>
+        <p class="text-xl text-brand-teal-700/70">
+          {t('about.intro')}
+        </p>
+      </div>
+
+      <!-- Portrait + Intro -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-20">
+        <div class="aspect-[3/4] bg-brand-cream-200 rounded-xl flex items-center justify-center">
+          <div class="text-center text-brand-teal-400">
+            <svg class="w-20 h-20 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+            </svg>
+            <p class="text-sm">Portrait Foto</p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-2xl font-display font-bold text-brand-teal-900 mb-4">
+              {t('about.philosophy.title')}
+            </h2>
+            <p class="text-brand-teal-700/80 leading-relaxed">
+              {t('about.philosophy.text')}
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-display font-bold text-brand-teal-900 mb-4">
+              {t('about.approach.title')}
+            </h2>
+            <p class="text-brand-teal-700/80 leading-relaxed">
+              {t('about.approach.text')}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qualifications -->
+      <div class="bg-white rounded-xl p-8 md:p-12 mb-20">
+        <h2 class="text-2xl font-display font-bold text-brand-teal-900 mb-8">
+          {t('about.qualifications.title')}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { title: 'Landschaftsarchitektur', desc: 'Studium & Abschluss' },
+            { title: 'Bauwerksbegrünung', desc: 'Zertifizierte Fachkompetenz' },
+            { title: 'Nachhaltige Planung', desc: 'Ökologisches Bauen' },
+            { title: 'Projektmanagement', desc: 'Von der Idee bis zur Umsetzung' },
+          ].map((qual) => (
+            <div class="flex items-start gap-4 p-4 bg-brand-cream-50 rounded-lg">
+              <div class="w-10 h-10 rounded-full bg-brand-teal-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-brand-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-brand-teal-900">{qual.title}</h3>
+                <p class="text-sm text-brand-teal-700/60">{qual.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA lang={lang} />
+</BaseLayout>

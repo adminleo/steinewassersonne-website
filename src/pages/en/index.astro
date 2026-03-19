@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import ServicesOverview from '../../components/home/ServicesOverview.astro';
+import AboutTeaser from '../../components/home/AboutTeaser.astro';
+import FeaturedProjects from '../../components/home/FeaturedProjects.astro';
+import ContactCTA from '../../components/home/ContactCTA.astro';
+
+const lang = 'en' as const;
+---
+
+<BaseLayout
+  title="Home"
+  description="Steinewassersonne — Landscape Design & Building Greening. Professional garden design, roof and facade greening in Bavaria."
+  lang={lang}
+>
+  <Hero lang={lang} />
+  <ServicesOverview lang={lang} />
+  <AboutTeaser lang={lang} />
+  <FeaturedProjects lang={lang} />
+  <ContactCTA lang={lang} />
+</BaseLayout>

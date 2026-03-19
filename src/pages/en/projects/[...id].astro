@@ -1,0 +1,99 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectGallery from '../../../components/projects/ProjectGallery.astro';
+import ProjectMeta from '../../../components/projects/ProjectMeta.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.lang === 'en');
+  return projects.map((project) => ({
+    params: { id: project.id.split('/').pop() },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+  title={project.data.title}
+  description={project.data.description}
+  lang={lang}
+>
+  <article class="section-padding">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Back Link -->
+      <a href="/en/projects/" class="inline-flex items-center gap-2 text-sm text-brand-teal-600 hover:text-brand-teal-500 mb-8 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        {t('projects.backToOverview')}
+      </a>
+
+      <!-- Hero Image -->
+      <div class="aspect-[21/9] bg-brand-cream-200 rounded-xl overflow-hidden mb-10">
+        <img
+          src={project.data.heroImage}
+          alt={project.data.title}
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <h1 class="font-display text-3xl sm:text-4xl font-bold text-brand-teal-900 mb-8">
+            {project.data.title}
+          </h1>
+          <div class="prose prose-lg max-w-none text-brand-teal-800">
+            <Content />
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside>
+          <ProjectMeta
+            location={project.data.location}
+            year={project.data.year}
+            scope={project.data.scope}
+            category={project.data.category}
+            lang={lang}
+          />
+        </aside>
+      </div>
+
+      <!-- Gallery -->
+      {project.data.gallery && project.data.gallery.length > 0 && (
+        <ProjectGallery images={project.data.gallery} title={project.data.title} />
+      )}
+
+      <!-- Plans -->
+      {project.data.plans && project.data.plans.length > 0 && (
+        <section class="mt-16">
+          <h2 class="font-display text-2xl font-semibold text-brand-teal-900 mb-6">
+            {t('projects.plans')}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {project.data.plans.map((plan, i) => (
+              <div class="aspect-[4/3] bg-brand-cream-200 rounded-lg overflow-hidden">
+                <img
+                  src={plan}
+                  alt={`Plan ${i + 1}`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>

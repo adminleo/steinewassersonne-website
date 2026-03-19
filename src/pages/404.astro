@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Seite nicht gefunden"
+  description="Die gesuchte Seite existiert leider nicht."
+  lang="de"
+>
+  <section class="section-padding">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="max-w-lg mx-auto">
+        <p class="text-8xl font-display font-bold text-brand-teal-200 mb-4">404</p>
+        <h1 class="text-2xl font-display font-bold text-brand-teal-900 mb-4">
+          Seite nicht gefunden
+        </h1>
+        <p class="text-brand-teal-700/70 mb-8">
+          Die gesuchte Seite existiert leider nicht.
+        </p>
+        <a href="/de/" class="btn-primary">
+          Zur Startseite
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

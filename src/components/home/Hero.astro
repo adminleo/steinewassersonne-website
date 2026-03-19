@@ -1,0 +1,52 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/languages';
+import { routeMap } from '../../i18n/languages';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="relative overflow-hidden bg-brand-teal-900 text-white">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hero-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="30" cy="30" r="1.5" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40">
+    <div class="max-w-3xl">
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        {t('hero.title')}
+      </h1>
+      <p class="text-lg sm:text-xl text-brand-cream-300 mb-10 max-w-2xl">
+        {t('hero.subtitle')}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href={routeMap.projects[lang]} class="btn-primary bg-white text-brand-teal-900 hover:bg-brand-cream-200">
+          {t('hero.cta')}
+        </a>
+        <a href={routeMap.contact[lang]} class="btn-secondary border-white text-white hover:bg-white hover:text-brand-teal-900">
+          {t('hero.cta.contact')}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative wave bottom -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+      <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" class="fill-brand-cream-50" />
+    </svg>
+  </div>
+</section>

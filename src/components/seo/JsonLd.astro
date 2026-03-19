@@ -1,0 +1,21 @@
+---
+interface Props {
+  type?: 'LocalBusiness' | 'WebPage';
+  data?: Record<string, unknown>;
+}
+
+const { type = 'LocalBusiness', data = {} } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': type,
+  name: 'Steinewassersonne',
+  description: 'Landschaftsgestaltung & Bauwerksbegrünung',
+  email: 'info@steinewassersonne.de',
+  url: 'https://steinewassersonne.de',
+  areaServed: { '@type': 'Country', name: 'Germany' },
+  ...data,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

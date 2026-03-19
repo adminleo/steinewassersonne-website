@@ -1,0 +1,58 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../i18n/languages';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const services = [
+  {
+    titleKey: 'services.landscape.title' as const,
+    descKey: 'services.landscape.desc' as const,
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4 0-9 6-9 12h18c0-6-5-12-9-12z" /><path stroke-linecap="round" stroke-linejoin="round" d="M3 15h18M6 19h12" /></svg>`,
+  },
+  {
+    titleKey: 'services.greening.title' as const,
+    descKey: 'services.greening.desc' as const,
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3c3.5 0 7 2 7 7-2 0-5-1-7-3-2 2-5 3-7 3 0-5 3.5-7 7-7z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v11M8 21h8" /></svg>`,
+  },
+  {
+    titleKey: 'services.planning.title' as const,
+    descKey: 'services.planning.desc' as const,
+    icon: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>`,
+  },
+];
+---
+
+<section class="section-padding bg-brand-cream-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-brand-teal-900 mb-4">
+        {t('services.title')}
+      </h2>
+      <p class="text-brand-teal-700/70 max-w-2xl mx-auto">
+        {t('services.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow group">
+          <div class="text-brand-teal-500 mb-5 group-hover:text-brand-teal-400 transition-colors">
+            <Fragment set:html={service.icon} />
+          </div>
+          <h3 class="text-xl font-display font-semibold text-brand-teal-900 mb-3">
+            {t(service.titleKey)}
+          </h3>
+          <p class="text-sm text-brand-teal-700/70 leading-relaxed">
+            {t(service.descKey)}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+import Logo from '../icons/Logo.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations, getNavItems } from '../../i18n/utils';
+import type { Lang } from '../../i18n/languages';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const navItems = getNavItems(lang);
+---
+
+<header class="sticky top-0 z-50 bg-brand-cream-50/95 backdrop-blur-sm border-b border-brand-cream-300">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
+    <a href={`/${lang}/`} aria-label="Home">
+      <Logo width={180} height={42} class="hidden sm:block" />
+      <Logo variant="icon" width={36} height={36} class="sm:hidden" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm font-medium text-brand-teal-700 hover:text-brand-teal-500 transition-colors"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+      <LanguageSwitcher lang={lang} currentPath={Astro.url.pathname} />
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden p-2 text-brand-teal-700"
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-brand-cream-300 bg-brand-cream-50">
+    <div class="px-4 py-4 space-y-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="block text-sm font-medium text-brand-teal-700 hover:text-brand-teal-500 py-2"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+      <div class="pt-2 border-t border-brand-cream-300">
+        <LanguageSwitcher lang={lang} currentPath={Astro.url.pathname} />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>
