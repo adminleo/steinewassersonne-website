@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://steinewassersonne.de',
+  site: 'https://adminleo.github.io',
+  base: '/steinewassersonne-website',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],

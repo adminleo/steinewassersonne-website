@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://steinewassersonne.de/sitemap-index.xml
+Sitemap: https://adminleo.github.io/steinewassersonne-website/sitemap-index.xml
